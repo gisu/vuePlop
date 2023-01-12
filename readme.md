@@ -9,5 +9,5 @@ npm install -g plop
 
 Then load the templates together with the plopfile into the project.
 ```bash
-npx degit gisu/vuePlop .
+npx degit gisu/vuePlop/stuff
 ```
