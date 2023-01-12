@@ -1,0 +1,20 @@
+import { Meta, Story } from '@storybook/vue3'
+import {{ pascalCase name }} from './{{ pascalCase name }}.vue'
+
+export default {
+  title: '{{ pascalCase name }}',
+  component: {{ pascalCase name }}
+} as Meta
+
+export const Primary: Story = (args: any) => ({
+  components: { {{ pascalCase name }} },
+  setup () {
+    return { args }
+  },
+  template: '<{{ pascalCase name }} v-bind="args" />'
+})
+
+Primary.args = {
+  primary: true,
+  label: '{{ pascalCase name }}'
+}

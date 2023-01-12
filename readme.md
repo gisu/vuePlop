@@ -11,3 +11,5 @@ Then load the templates together with the plopfile into the project.
 ```bash
 npx degit gisu/vuePlop/stuff
 ```
+
+Within the `plopfile.js` you can still modify the paths if you have structured your project differently. 

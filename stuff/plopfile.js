@@ -30,36 +30,36 @@ module.exports = function (plop) {
             {
               name: 'vue',
               message: 'Vue file'
-            },
-            {
-              name: 'unit',
-              message: 'Unit test file'
-            },
-            {
-              name: 'story',
-              message: 'Storybook file'
+                    },
+                    {
+                        name: 'unit',
+                        message: 'Unit test file'
+                    },
+                    {
+                        name: 'story',
+                        message: 'Storybook file'
+                    }
+                ]
             }
-          ]
-        }
-      ],
-      actions: [
-        {
-          skip: function (answers) {
-            return !answers.files.includes('vue') ? 'skipped' : null
-          },
-          type: 'add',
-          path: `${COMPONENT_PATH}{{type}}/{{pascalCase name}}/{{pascalCase name}}.vue`,
-          templateFile: 'plopTemplates/component.hbs',
-          skipIfExists: true
-        },
-        {
-          skip: function (answers) {
-            return !answers.files.includes('unit') ? 'skipped' : null
-          },
-          type: 'add',
-          path: `${COMPONENT_PATH}{{type}}/{{pascalCase name}}/{{pascalCase name}}.test.ts`,
-          templateFile: 'plopTemplates/unitComponent.hbs',
-          skipIfExists: true
+        ],
+        actions: [
+            {
+                skip: function (answers) {
+                    return !answers.files.includes('vue') ? 'skipped' : null
+                },
+                type: 'add',
+                path: `${COMPONENT_PATH}{{type}}/{{pascalCase name}}/{{pascalCase name}}.vue`,
+                templateFile: 'plopTemplates/component.hbs',
+                skipIfExists: true
+            },
+            {
+                skip: function (answers) {
+                    return !answers.files.includes('unit') ? 'skipped' : null
+                },
+                type: 'add',
+                path: `${COMPONENT_PATH}{{type}}/{{pascalCase name}}/{{pascalCase name}}.test.ts`,
+                templateFile: 'plopTemplates/unitComponent.hbs',
+                skipIfExists: true
   
         },
         {
@@ -95,27 +95,27 @@ module.exports = function (plop) {
     })
   
     plop.setGenerator('page', {
-      description: 'Build a Page Skeleton',
-      prompts: [
-        {
-          type: 'input',
-          name: 'name',
-          message: 'Name of the Page'
-        },
-        {
-          type: 'input',
-          name: 'path',
-          message: 'Path of the Page'
-        }
-      ],
-      actions: [
-        {
-          type: 'add',
-          path: `${PAGE_PATH}{{path}}{{camelCase name}}.vue`,
-          templateFile: 'plopTemplates/page.hbs',
-          skipIfExists: true
-        }
-      ]
+        description: 'Build a Page Skeleton',
+        prompts: [
+            {
+                type: 'input',
+                name: 'name',
+                message: 'Name of the Page'
+            },
+            {
+                type: 'input',
+                name: 'path',
+                message: 'Path of the Page'
+            }
+        ],
+        actions: [
+            {
+                type: 'add',
+                path: `${PAGE_PATH}{{path}}{{camelCase name}}.vue`,
+                templateFile: 'plopTemplates/page.hbs',
+                skipIfExists: true
+            }
+        ]
     })
   
     plop.setGenerator('composable', {
@@ -153,28 +153,28 @@ module.exports = function (plop) {
     })
   
     plop.setGenerator('store', {
-      description: 'Build a Pinia Store File',
-      prompts: [
-        {
-          type: 'input',
-          name: 'name',
-          message: 'Name of the Store'
-        },
-        {
-          type: 'confirm',
-          name: 'persist',
-          message: 'Persist the Store?',
-          default: false
-        }
-      ],
-      actions: [
-        {
-          type: 'add',
-          path: `${STORE_PATH}{{camelCase name}}.ts`,
-          templateFile: 'plopTemplates/piniaStore.hbs',
-          skipIfExists: true
-        }
-      ]
+        description: 'Build a Pinia Store File',
+        prompts: [
+            {
+                type: 'input',
+                name: 'name',
+                message: 'Name of the Store'
+            },
+            {
+                type: 'confirm',
+                name: 'persist',
+                message: 'Persist the Store?',
+                default: false
+            }
+        ],
+        actions: [
+            {
+                type: 'add',
+                path: `${STORE_PATH}{{camelCase name}}.ts`,
+                templateFile: 'plopTemplates/piniaStore.hbs',
+                skipIfExists: true
+            }
+        ]
     })
   
     plop.setGenerator('interface', {
@@ -195,5 +195,4 @@ module.exports = function (plop) {
         }
       ]
     })
-  }
-  
+}
