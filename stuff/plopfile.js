@@ -1,35 +1,40 @@
+const inputRequired = name => {
+    return value => (/.+/.test(value) ? true : `${name} is required`)
+}
+
 module.exports = function (plop) {
     const COMPONENT_PATH = 'src/components/'
     const LAYOUT_PATH = 'src/layouts/'
     const PAGE_PATH = 'src/pages/'
-    const COMPOSABLE_PATH = 'src/composables/'
+    const COMPOSABLE_PATH = 'src/composable/'
     const STORE_PATH = 'src/store/'
     const TYPES_PATH = 'src/types/'
-  
+
     plop.setGenerator('components', {
-      description: 'Build a Component Skeleton',
-      prompts: [
-        {
-          type: 'input',
-          name: 'name',
-          message: 'Name of the component?'
-        },
-        {
-          type: 'list',
-          name: 'type',
-          message: 'Type of the component?',
-          choices: ['pure', 'base', 'feature', 'wrapper', 'provider'],
-          default: 'pure'
-        },
-        {
-          type: 'checkbox',
-          name: 'files',
-          message: 'Files to create?',
-          default: ['vue', 'unit'],
-          choices: [
+        description: 'Build a Component Skeleton',
+        prompts: [
             {
-              name: 'vue',
-              message: 'Vue file'
+                type: 'input',
+                name: 'name',
+                message: 'Name of the component?',
+                validate: inputRequired('title')
+            },
+            {
+                type: 'list',
+                name: 'type',
+                message: 'Type of the component?',
+                choices: ['pure', 'base', 'feature', 'wrapper', 'provider'],
+                default: 'pure'
+            },
+            {
+                type: 'checkbox',
+                name: 'files',
+                message: 'Files to create?',
+                default: ['vue', 'unit'],
+                choices: [
+                    {
+                        name: 'vue',
+                        message: 'Vue file'
                     },
                     {
                         name: 'unit',
@@ -60,40 +65,39 @@ module.exports = function (plop) {
                 path: `${COMPONENT_PATH}{{type}}/{{pascalCase name}}/{{pascalCase name}}.test.ts`,
                 templateFile: 'plopTemplates/unitComponent.hbs',
                 skipIfExists: true
-  
-        },
-        {
-          skip: function (answers) {
-            return !answers.files.includes('stories') ? 'skipped' : null
-          },
-          type: 'add',
-          path: `${COMPONENT_PATH}{{type}}/{{pascalCase name}}/{{pascalCase name}}.stories.ts`,
-          templateFile: 'plopTemplates/componentStory.hbs',
-          skipIfExists: true
-        }
-      ]
+            },
+            {
+                skip: function (answers) {
+                    return !answers.files.includes('story') ? 'skipped' : null
+                },
+                type: 'add',
+                path: `${COMPONENT_PATH}{{type}}/{{pascalCase name}}/{{pascalCase name}}.stories.ts`,
+                templateFile: 'plopTemplates/componentStory.hbs',
+                skipIfExists: true
+            }
+        ]
     })
-  
+
     plop.setGenerator('layout', {
-      description: 'Build a Layout Skeleton',
-      prompts: [
-        {
-          type: 'input',
-          name: 'name',
-          message: 'Name of the Layout'
-        }
-  
-      ],
-      actions: [
-        {
-          type: 'add',
-          path: `${LAYOUT_PATH}{{camelCase name}}.vue`,
-          templateFile: 'plopTemplates/layout.hbs',
-          skipIfExists: true
-        }
-      ]
+        description: 'Build a Layout Skeleton',
+        prompts: [
+            {
+                type: 'input',
+                name: 'name',
+                message: 'Name of the Layout'
+            }
+
+        ],
+        actions: [
+            {
+                type: 'add',
+                path: `${LAYOUT_PATH}{{camelCase name}}.vue`,
+                templateFile: 'plopTemplates/layout.hbs',
+                skipIfExists: true
+            }
+        ]
     })
-  
+
     plop.setGenerator('page', {
         description: 'Build a Page Skeleton',
         prompts: [
@@ -117,41 +121,41 @@ module.exports = function (plop) {
             }
         ]
     })
-  
+
     plop.setGenerator('composable', {
-      description: 'Build a Composable Skeleton',
-      prompts: [
-        {
-          type: 'input',
-          name: 'name',
-          message: 'Name of the Composable'
-        },
-        {
-          type: 'confirm',
-          name: 'unit',
-          message: 'Add a Unit Test File?',
-          default: true
-        }
-      ],
-      actions: [
-        {
-          type: 'add',
-          path: `${COMPOSABLE_PATH}{{camelCase name}}/{{camelCase name}}.ts`,
-          templateFile: 'plopTemplates/composable.hbs',
-          skipIfExists: true
-        },
-        {
-          skip: function (answers) {
-            return !answers.unit ? 'skipped' : null
-          },
-          type: 'add',
-          path: 'src/composable/{{camelCase name}}/{{camelCase name}}.test.ts',
-          templateFile: 'plopTemplates/unitComposable.hbs',
-          skipIfExists: true
-        }
-      ]
+        description: 'Build a Composable Skeleton',
+        prompts: [
+            {
+                type: 'input',
+                name: 'name',
+                message: 'Name of the Composable'
+            },
+            {
+                type: 'confirm',
+                name: 'unit',
+                message: 'Add a Unit Test File?',
+                default: true
+            }
+        ],
+        actions: [
+            {
+                type: 'add',
+                path: `${COMPOSABLE_PATH}{{camelCase name}}/{{camelCase name}}.ts`,
+                templateFile: 'plopTemplates/composable.hbs',
+                skipIfExists: true
+            },
+            {
+                skip: function (answers) {
+                    return !answers.unit ? 'skipped' : null
+                },
+                type: 'add',
+                path: 'src/composable/{{camelCase name}}/{{camelCase name}}.test.ts',
+                templateFile: 'plopTemplates/unitComposable.hbs',
+                skipIfExists: true
+            }
+        ]
     })
-  
+
     plop.setGenerator('store', {
         description: 'Build a Pinia Store File',
         prompts: [
@@ -176,23 +180,23 @@ module.exports = function (plop) {
             }
         ]
     })
-  
+
     plop.setGenerator('interface', {
-      description: 'Build a Typescript Interface',
-      prompts: [
-        {
-          type: 'input',
-          name: 'name',
-          message: 'Name of the Interface'
-        }
-      ],
-      actions: [
-        {
-          type: 'add',
-          path: `${TYPES_PATH}{{camelCase name}}.interfaces.ts`,
-          templateFile: 'plopTemplates/interface.hbs',
-          skipIfExists: true
-        }
-      ]
+        description: 'Build a Typescript Interface',
+        prompts: [
+            {
+                type: 'input',
+                name: 'name',
+                message: 'Name of the Interface'
+            }
+        ],
+        actions: [
+            {
+                type: 'add',
+                path: `${TYPES_PATH}{{camelCase name}}.interfaces.ts`,
+                templateFile: 'plopTemplates/interface.hbs',
+                skipIfExists: true
+            }
+        ]
     })
 }
