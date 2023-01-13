@@ -10,7 +10,9 @@ module.exports = function (plop) {
   const STORE_PATH = 'src/store/'
   const TYPES_PATH = 'src/types/'
 
-
+  plop.setWelcomeMessage(
+    'Welcome to the Vue 3 Plop generator! Please select a generator.'
+  )
   plop.setGenerator('components', {
     description: 'Build a Component Skeleton',
     prompts: [
