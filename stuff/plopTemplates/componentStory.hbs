@@ -1,20 +1,42 @@
-import { Meta, Story } from '@storybook/vue3'
+import type { Meta, StoryObj } from '@storybook/vue3'
 import {{ pascalCase name }} from './{{ pascalCase name }}.vue'
 
-export default {
-  title: '{{ pascalCase name }}',
-  component: {{ pascalCase name }}
-} as Meta
-
-export const Primary: Story = (args: any) => ({
-  components: { {{ pascalCase name }} },
-  setup () {
-    return { args }
+const meta: Meta<typeof {{ pascalCase name }}> = {
+  title: 'Components/{{pascalCase type}}/{{ pascalCase name }}',
+  component: {{ pascalCase name }},
+  tags: ['autodocs'],
+  argTypes: {
+    // Define your interactive Props here
+    // example: {
+    //  options: ['text', 'password', 'email', 'number'],
+    //  control: {
+    //    type: 'select'
+    //  }
   },
-  template: '<{{ pascalCase name }} v-bind="args" />'
-})
+  parameters: {
+    docs: {
+      description: {
+        component: 'Some component _markdown_'
+      }
+    }
+  }
+}
 
-Primary.args = {
-  primary: true,
-  label: '{{ pascalCase name }}'
+export default meta
+type Story = StoryObj<typeof {{ pascalCase name }}>
+
+// First Story of the Component
+export const {{ pascalCase name }}Story: Story = {
+  // name: 'Self defined Story Name',
+  render: (args) => ({
+    components: { {{ pascalCase name }} },
+    setup() {
+      return { args }
+    },
+    template: '<{{ pascalCase name }} v-bind="args" />'
+  }),
+  args: {
+    // Define the Data for your props
+    // example: 'Prefilled value'
+  }
 }
